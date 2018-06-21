@@ -1,8 +1,9 @@
-class Entity {
+class Character {
     constructor() {
         this.sprite = 'images/';
         this.x = 2;
         this.y = 5;
+        this.level = 1;
     }
 
     render() {
@@ -30,7 +31,7 @@ class Entity {
 
 }
 
-class Player extends Entity {
+class Player extends Character {
     constructor() {
         super();
         this.sprite += 'char-boy.png';
@@ -43,7 +44,7 @@ class Player extends Entity {
         if  (this.isOutOfBoundsY && !this.moving&& !this.win){
             alert("Win");
             this.win = true;
-        
+
         }
     }
 
@@ -79,21 +80,23 @@ class Player extends Entity {
 }   
 
 
-class Enemy extends Entity {
+class Enemy extends Character {
     constructor(x,y) {
         super();
         this.sprite += 'enemy-bug.png';
         this.x = x;
         this.y = y;
+
     }
 
     update(dt) {
         super.update();
+        let rand = Math.random()*dt*5;
         if (this.isOutOfBoundsX){
             this.x = -1;
         }
         else {
-            this.x += dt;
+            this.x += rand;
         }
 
     }
