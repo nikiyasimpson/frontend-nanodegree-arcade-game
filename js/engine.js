@@ -104,7 +104,14 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
+        if (player.win){
+            reset();
+        }
+        else
+        {
+            player.update();
+        }
+        
     }
 
     /* This function initially draws the "game level", it will then call
@@ -172,6 +179,12 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
+
+    
+             player.y = 5;
+             player.x = 2;
+             player.win = false;
+        
         // noop
     }
 
