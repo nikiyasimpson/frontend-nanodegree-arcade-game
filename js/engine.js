@@ -66,6 +66,9 @@ var Engine = (function(global) {
         reset();
         lastTime = Date.now();
         main();
+
+        var modal = document.getElementById('winModal');
+        modal.style.display = "none";
     }
 
     /* This function is called by main (our game loop) and itself calls all

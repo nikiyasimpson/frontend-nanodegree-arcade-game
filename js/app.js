@@ -1,3 +1,5 @@
+
+
 class Character {
     constructor() {
         this.sprite = 'images/';
@@ -42,8 +44,8 @@ class Player extends Character {
     update(dt) {
         super.update();
         if  (this.isOutOfBoundsY && !this.moving&& !this.win){
-            alert("Win");
-            this.win = true;
+                showWin();
+                this.win = true;
 
         }
     }
@@ -123,3 +125,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
