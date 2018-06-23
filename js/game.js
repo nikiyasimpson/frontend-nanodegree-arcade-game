@@ -24,6 +24,6 @@ function showWin() {
 }
 
 function startOver() {
-	document.getElementsByTagName('window').reset();
+	location.reload();
 }
 
