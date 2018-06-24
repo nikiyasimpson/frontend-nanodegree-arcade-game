@@ -1,4 +1,10 @@
-
+class Game {
+    contructor(level){
+        this.level = level;
+        this.score = 0;
+        this.time = 0;
+    }
+}
 
 class Character {
     constructor() {
@@ -103,6 +109,9 @@ class Enemy extends Character {
 
     }
 }
+
+
+let game = new Game();
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies

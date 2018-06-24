@@ -28,9 +28,139 @@ var Engine = (function(global) {
     canvas.height = 606;
     doc.body.appendChild(canvas);
 
+
+
+    /*Create Begin Game Modal */
+    const startModal = doc.createElement('div');
+    doc.body.appendChild(startModal);
+    startModal.classList.add("modal");
+
+    const startModalContent = doc.createElement('div');
+    startModal.appendChild(startModalContent);
+    startModalContent.classList.add("modal-content");
+    const levelInsP= doc.createElement('h2');
+    startModalContent.appendChild(levelInsP);
+
+    /* Choose Player Level */
+    var levelInst = document.createTextNode("Choose Your Level");  
+    levelInsP.appendChild(levelInst);
+
+    const levelChoice = doc.createElement('ul'),
+            level1 = document.createElement('li'),
+            level2  = document.createElement('li'),
+            level3 = document.createElement('li');
+
+    let gameLevel = 1;
+
+    level1.textContent = '1';
+    level2.textContent = '2';
+    level3.textContent = '3';
+
+    levelChoice.classList.add("level");
+
+    startModalContent.appendChild(levelChoice);
+    levelChoice.appendChild(level1);
+    levelChoice.appendChild(level2);
+    levelChoice.appendChild(level3);
+
+    let playerLevel = levelChoice.getElementsByClassName("level");
+    playerLevel.onclick = function() {
+        gameLevel = playerLevel.textContent;
+    }
+
+    /*Choose Player Avatar */
+    const playerInsP= doc.createElement('h2');
+    startModalContent.appendChild(playerInsP);
+    var playerInst = document.createTextNode("Choose Your Player");  
+    playerInsP.appendChild(playerInst);
+
+    var player1 = document.createElement("img");
+    var player2 = document.createElement("img");
+    var player3 = document.createElement("img");
+
+
+    player1src = 'images/char-boy.png';
+    player2src = 'images/char-pink-girl.png';
+    player3src = 'images/char-princess-girl.png';
+
+    player1.src = player1src;
+    player2.src = player2src;
+    player3.src = player3src;
+
+    const playerChoices = doc.createElement('ul'),
+            playerchoice1 = document.createElement('li'),
+            playerchoice2  = document.createElement('li'),
+            playerchoice3 = document.createElement('li');
+
+
+    playerchoice1.appendChild(player1);
+    playerchoice2.appendChild(player2);
+    playerchoice3.appendChild(player3);
+
+    playerchoice1.classList.add("playerSelection");
+    playerchoice2.classList.add("playerSelection");
+    playerchoice3.classList.add("playerSelection");
+
+
+    playerChoices.classList.add("player");
+
+    startModalContent.appendChild(playerChoices);
+    playerChoices.appendChild(playerchoice1);
+    playerChoices.appendChild(playerchoice2);
+    playerChoices.appendChild(playerchoice3);
+
+    let playerChoice = playerChoices.getElementsByClassName("player");
+
+
+    playerchoice1.onclick = function(){
+        playerchoice1.style.backgroundColor = "blue";
+        playerchoice2.style.removeProperty("background-color");
+        playerchoice3.style.removeProperty("background-color");
+    }
+
+
+    playerchoice2.onclick = function(){
+        playerchoice2.style.backgroundColor = "blue";
+        playerchoice1.style.removeProperty("background-color");
+        playerchoice3.style.removeProperty("background-color");
+    }
+
+
+    playerchoice3.onclick = function(){
+        playerchoice3.style.backgroundColor = "blue";
+        playerchoice1.style.removeProperty("background-color");
+        playerchoice2.style.removeProperty("background-color");
+    }
+
+
+
+    const startButton = doc.createElement('button');
+    startModalContent.appendChild(startButton);
+    var t = document.createTextNode("Start Game");  
+    startButton.classList.add("playButton");
+    startButton.appendChild(t);
+    startButton.onclick = function (){
+        init();
+    }
+
+
+
+
+
+
+    function beginGame(){
+        
+        startModal.style.display = "block";
+    }
+
+    beginGame();
+
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
+
+
+
     function main() {
         /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
@@ -63,12 +193,13 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
+
+        startModal.style.display = "none";
         reset();
         lastTime = Date.now();
         main();
 
-        var modal = document.getElementById('winModal');
-        modal.style.display = "none";
+        
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -201,9 +332,10 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/char-pink-girl.png'
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png'
     ]);
-    Resources.onReady(init);
+    
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developers can use it more easily
