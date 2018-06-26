@@ -76,8 +76,8 @@ p{
     display:inline-flex;
     border: 1px grey;
     border-radius: 5px;
-    background: green;
-    color:white;
+    
+    color:black;
     padding:5px;
     width:50px;
     height:50px;
@@ -90,10 +90,6 @@ p{
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
-.level li:hover {
-    background:blue;
-
-}
 
 /* Player */
 .player {
@@ -132,4 +128,27 @@ p{
 .player li:hover {
     
 
+}
+
+.selected li {
+    background-color:blue;
+}
+
+.selected {
+    background-color:blue;
+    color:white;
+}
+
+.starthere {
+    display: block; 
+    position: fixed; /* Stay in place */
+    float:left;
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 30%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,255,0.4); /* Black w/ opacity */
 }

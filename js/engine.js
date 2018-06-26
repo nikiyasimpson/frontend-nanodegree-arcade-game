@@ -13,11 +13,15 @@
  * writing app.js a little simpler to work with.
  */
 
+ var gameLevel = 1;
+
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
      */
+
+
     var doc = global.document,
         win = global.window,
         canvas = doc.createElement('canvas'),
@@ -29,28 +33,29 @@ var Engine = (function(global) {
     doc.body.appendChild(canvas);
 
 
+/* Start Here Area */
+    const startSection = document.createElement('div');
+    document.body.appendChild(startSection);
+    startSection.classList.add("modal");
 
-    /*Create Begin Game Modal */
-    const startModal = doc.createElement('div');
-    doc.body.appendChild(startModal);
-    startModal.classList.add("modal");
+    startSection.style.display = "block";
 
-    const startModalContent = doc.createElement('div');
-    startModal.appendChild(startModalContent);
-    startModalContent.classList.add("modal-content");
-    const levelInsP= doc.createElement('h2');
-    startModalContent.appendChild(levelInsP);
+    const startSectionContent = document.createElement('div');
+    startSection.appendChild(startSectionContent);
+    startSectionContent.classList.add("modal-content");
+    const levelInsP= document.createElement('h2');
+    startSectionContent.appendChild(levelInsP);
 
     /* Choose Player Level */
     var levelInst = document.createTextNode("Choose Your Level");  
     levelInsP.appendChild(levelInst);
 
-    const levelChoice = doc.createElement('ul'),
+    const levelChoice = document.createElement('ul'),
             level1 = document.createElement('li'),
             level2  = document.createElement('li'),
             level3 = document.createElement('li');
 
-    let gameLevel = 1;
+    let playerChoice =  "/images/char-boy.png";
 
     level1.textContent = '1';
     level2.textContent = '2';
@@ -58,19 +63,50 @@ var Engine = (function(global) {
 
     levelChoice.classList.add("level");
 
-    startModalContent.appendChild(levelChoice);
+    startSectionContent.appendChild(levelChoice);
     levelChoice.appendChild(level1);
     levelChoice.appendChild(level2);
     levelChoice.appendChild(level3);
 
-    let playerLevel = levelChoice.getElementsByClassName("level");
-    playerLevel.onclick = function() {
-        gameLevel = playerLevel.textContent;
+
+       level1.onclick = function(){
+        
+        level1.classList.add("selected");
+        level2.classList.remove("selected");
+        level3.classList.remove("selected");
+        gameLevel = 1;
+       
     }
 
+
+        level2.onclick = function(){
+    
+        level2.classList.add("selected");
+        level1.classList.remove("selected");
+        level3.classList.remove("selected");
+        gameLevel = 2;
+
+    }
+
+
+    
+
+
+        level3.onclick = function(){
+        
+        level3.classList.add("selected");
+        level1.classList.remove("selected");
+        level2.classList.remove("selected");
+        gameLevel= 3;
+       
+    }
+ 
+    
+
+
     /*Choose Player Avatar */
-    const playerInsP= doc.createElement('h2');
-    startModalContent.appendChild(playerInsP);
+    const playerInsP= document.createElement('h2');
+    startSectionContent.appendChild(playerInsP);
     var playerInst = document.createTextNode("Choose Your Player");  
     playerInsP.appendChild(playerInst);
 
@@ -79,15 +115,15 @@ var Engine = (function(global) {
     var player3 = document.createElement("img");
 
 
-    player1src = 'images/char-boy.png';
-    player2src = 'images/char-pink-girl.png';
-    player3src = 'images/char-princess-girl.png';
+    player1src = 'char-boy.png';
+    player2src = 'char-pink-girl.png';
+    player3src = 'char-princess-girl.png';
 
-    player1.src = player1src;
-    player2.src = player2src;
-    player3.src = player3src;
+    player1.src = 'images/'+ player1src;
+    player2.src = 'images/'+ player2src;
+    player3.src = 'images/'+ player3src;
 
-    const playerChoices = doc.createElement('ul'),
+    const playerChoices = document.createElement('ul'),
             playerchoice1 = document.createElement('li'),
             playerchoice2  = document.createElement('li'),
             playerchoice3 = document.createElement('li');
@@ -104,56 +140,85 @@ var Engine = (function(global) {
 
     playerChoices.classList.add("player");
 
-    startModalContent.appendChild(playerChoices);
+    startSectionContent.appendChild(playerChoices);
     playerChoices.appendChild(playerchoice1);
     playerChoices.appendChild(playerchoice2);
     playerChoices.appendChild(playerchoice3);
 
-    let playerChoice = playerChoices.getElementsByClassName("player");
 
 
     playerchoice1.onclick = function(){
-        playerchoice1.style.backgroundColor = "blue";
-        playerchoice2.style.removeProperty("background-color");
-        playerchoice3.style.removeProperty("background-color");
+        
+        playerchoice1.classList.add("selected");
+        playerchoice2.classList.remove("selected");
+        playerchoice3.classList.remove("selected");
+        player.sprite = 'images/char-boy.png';
     }
 
 
     playerchoice2.onclick = function(){
-        playerchoice2.style.backgroundColor = "blue";
-        playerchoice1.style.removeProperty("background-color");
-        playerchoice3.style.removeProperty("background-color");
+    
+        playerchoice2.classList.add("selected");
+        playerchoice1.classList.remove("selected");
+        playerchoice3.classList.remove("selected");
+        player.sprite = 'images/char-pink-girl.png';
+
+
     }
 
 
     playerchoice3.onclick = function(){
-        playerchoice3.style.backgroundColor = "blue";
-        playerchoice1.style.removeProperty("background-color");
-        playerchoice2.style.removeProperty("background-color");
+        
+        playerchoice3.classList.add("selected");
+        playerchoice1.classList.remove("selected");
+        playerchoice2.classList.remove("selected");
+        player.sprite = 'images/char-princess-girl.png';
+ 
     }
 
 
 
-    const startButton = doc.createElement('button');
-    startModalContent.appendChild(startButton);
+    const startButton = document.createElement('button');
+    startSectionContent.appendChild(startButton);
     var t = document.createTextNode("Start Game");  
     startButton.classList.add("playButton");
     startButton.appendChild(t);
     startButton.onclick = function (){
+        startSection.style.display = "none";
+    
+        game.level = gameLevel;
+
+        if (player.sprite === "images/") {
+            player.sprite = "images/char-boy.png";
+        }
+
+        const enemy1 = new Enemy(0,1,gameLevel);
+const enemy2 = new Enemy(-1,2,gameLevel);
+const enemy3 = new Enemy(-2,3,gameLevel);
+const enemy4 = new Enemy(0,4,gameLevel);
+const enemy5 = new Enemy(-3,2,gameLevel);
+const enemy6 = new Enemy(1,1,gameLevel);
+switch (game.level) {
+    case 1:
+        
+            allEnemies = [enemy1,enemy2,enemy3];
+        break;
+
+    case 2:
+        allEnemies = [enemy1,enemy2,enemy3,enemy4];
+        break;
+    case 3:
+        allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5];
+        break;
+   
+    default:
+        allEnemies = [enemy1,enemy2,enemy3];
+}
+        
+
         init();
     }
 
-
-
-
-
-
-    function beginGame(){
-        
-        startModal.style.display = "block";
-    }
-
-    beginGame();
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -174,6 +239,8 @@ var Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
+
+        
         update(dt);
         render();
 
@@ -194,9 +261,10 @@ var Engine = (function(global) {
      */
     function init() {
 
-        startModal.style.display = "none";
+        
         reset();
         lastTime = Date.now();
+      
         main();
 
         
@@ -305,6 +373,8 @@ var Engine = (function(global) {
             enemy.render();
         });
 
+       
+
         player.render();
     }
 
@@ -342,4 +412,5 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+
 })(this);

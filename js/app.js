@@ -1,6 +1,6 @@
 class Game {
-    contructor(level){
-        this.level = level;
+    contructor(){
+        this.level = 3;
         this.score = 0;
         this.time = 0;
     }
@@ -42,9 +42,10 @@ class Character {
 class Player extends Character {
     constructor() {
         super();
-        this.sprite += 'char-boy.png';
+    
         this.playing = false;
         this.win = false;
+        
     }
 
     update(dt) {
@@ -89,17 +90,36 @@ class Player extends Character {
 
 
 class Enemy extends Character {
-    constructor(x,y) {
+    constructor(x,y,level =1) {
         super();
         this.sprite += 'enemy-bug.png';
         this.x = x;
         this.y = y;
+        this.level = level;
+        //this.speed = level *4;
+
+        switch (level) {
+    case 1:
+        
+            this.speed = 4;
+        break;
+
+    case 2:
+            this.speed = 6;
+        break;
+    case 3:
+            this.speed = 8;
+        break;
+   
+    default:
+            this.speed = 4;
+}
 
     }
 
     update(dt) {
         super.update();
-        let rand = Math.random()*dt*5;
+        let rand = Math.random()*dt* this.speed;
         if (this.isOutOfBoundsX){
             this.x = -1;
         }
@@ -110,15 +130,31 @@ class Enemy extends Character {
     }
 }
 
+    
+
+
 
 let game = new Game();
+game.level = gameLevel;
+
+
+
+
+//Enemies
+
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-let allEnemies = [...Array(3)].map((_,i) => new Enemy(0,i+1));
-// Place the player object in a variable called player
-const player = new Player();
+//let allEnemies = [...Array(3)].map((_,i) => new Enemy(0,i+1,1));
 
+let allEnemies = [];
+
+
+
+// Place the player object in a variable called player
+//const player = new Player();
+  player = new Player();
 
 
 
@@ -134,4 +170,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
 
