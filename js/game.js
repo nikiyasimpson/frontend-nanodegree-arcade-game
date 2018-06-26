@@ -27,3 +27,11 @@ function startOver() {
 	location.reload();
 }
 
+
+
+/* Update timer display */
+function updateDisplay() {
+    let value = parseInt($('#timer').find('.value').text(), 10);
+    value++;
+    $('#timer').find('.value').text(value);
+}
