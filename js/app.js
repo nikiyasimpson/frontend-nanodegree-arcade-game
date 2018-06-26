@@ -3,6 +3,7 @@ class Game {
         this.level = 1;
         this.stars = 0;
         this.time = 0;
+        this.gameOver = false;
     }
 }
 
@@ -50,11 +51,15 @@ class Player extends Character {
 
     update(dt) {
         super.update();
-        if  (this.isOutOfBoundsY && !this.moving&& !this.win){
-                showWin();
+
+        if  (this.isOutOfBoundsY && !this.moving && !this.win){
+                
                 this.win = true;
+                
 
         }
+
+       
     }
 
     render() {
@@ -162,6 +167,8 @@ let allEnemies = [];
 
 let stars = [];
  let game = new Game();
+ var gameLevel = 1;
+ var gameTimer;
 
 
 // Place the player object in a variable called player

@@ -13,8 +13,6 @@
  * writing app.js a little simpler to work with.
  */
 
- var gameLevel = 1;
- var gameTimer;
 
 
 var Engine = (function(global) {
@@ -287,13 +285,18 @@ function updateDisplay() {
 
         
         reset();
+        game.gameOver = false;
+
+
         lastTime = Date.now();
 
 
          gameTimer = setInterval(updateDisplay, 1000); // every second call updateDisplay
 
-        setTimeout(function() {        // Set a timer
-        clearInterval(gameTimer);      // Stop the running loop
+        setTimeout(function() {    
+            // Set a timer
+                if(game.gameOver === false) {
+                    clearInterval(gameTimer);      // Stop the running loop
                     const gameOver = document.createElement('div');
                     document.body.appendChild(gameOver);
                     gameOver.classList.add("modal");
@@ -318,6 +321,7 @@ function updateDisplay() {
 
                         
                     }
+                }
 
                         // Let the user know, do other stuff here
         }, 20000); 
@@ -373,8 +377,11 @@ function updateDisplay() {
             enemy.update(dt);
         });
         if (player.win){
+            showWin();
+            game.gameOver = true;
             reset();
-            clearInterval(gameTimer);
+            
+            
         }
         else
         {
@@ -487,7 +494,6 @@ function updateDisplay() {
      * from within their app.js files.
      */
     global.ctx = ctx;
-
 
 
 })(this);

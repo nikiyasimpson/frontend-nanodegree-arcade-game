@@ -1,49 +1,54 @@
 
-
 //Show Winner Modal
 
 
 function showWin() {
-	clearInterval(gameTimer);
-	var modal = document.getElementById('winModal');
-
-	var content = document.getElementById('winContent');
 
 
-	var starPanel = document.createElement("div");
+
+    var modal = document.getElementById('winModal');
 
 
-	for (let i=0; i<= game.stars; i++){
-		if (i>0){
-		const starImage = document.createElement("img");
-		starImage.src = "images/Star.png";
-		starPanel.appendChild(starImage);
-	}
-	}
+    var content = document.getElementById('winContent');
 
-	content.appendChild(starPanel);
 
-	var closeBar = document.getElementsByClassName("close")[0];
+    var starPanel = document.createElement("div");
 
-	modal.style.display = "block";
 
-	// When the user clicks on <span> (x), close the modal
-	closeBar.onclick = function() {
+    for (let i=0; i<= game.stars; i++){
+        if (i>0){
+        const starImage = document.createElement("img");
+        starImage.src = "images/Star.png";
+        starPanel.appendChild(starImage);
+        }
+    }
+
+    content.appendChild(starPanel);
+
+    var closeBar = document.getElementsByClassName("close")[0];
+
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    closeBar.onclick = function() {
     modal.style.display = "none";
     startOver();
-	}
+    }
 
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-	}
+
+
+    }
+
 
 }
 
 function startOver() {
-	location.reload();
+    location.reload();
 }
 
 
