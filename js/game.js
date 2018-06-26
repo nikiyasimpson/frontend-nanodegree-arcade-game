@@ -2,8 +2,25 @@
 
 //Show Winner Modal
 
+
 function showWin() {
 	var modal = document.getElementById('winModal');
+
+	var content = document.getElementById('winContent');
+
+
+	var starPanel = document.createElement("div");
+
+
+	for (let i=0; i<= game.stars; i++){
+		if (i>0){
+		const starImage = document.createElement("img");
+		starImage.src = "images/Star.png";
+		starPanel.appendChild(starImage);
+	}
+	}
+
+	content.appendChild(starPanel);
 
 	var closeBar = document.getElementsByClassName("close")[0];
 

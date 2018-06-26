@@ -278,7 +278,9 @@ function updateDisplay() {
         
         reset();
         lastTime = Date.now();
-      
+        let game = new Game();
+game.level = gameLevel;
+game.stars = 0;
         main();
 
         
