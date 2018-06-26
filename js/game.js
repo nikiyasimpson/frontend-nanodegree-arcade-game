@@ -4,6 +4,7 @@
 
 
 function showWin() {
+	clearInterval(gameTimer);
 	var modal = document.getElementById('winModal');
 
 	var content = document.getElementById('winContent');

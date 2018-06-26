@@ -14,6 +14,8 @@
  */
 
  var gameLevel = 1;
+ var gameTimer;
+
 
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
@@ -21,6 +23,7 @@ var Engine = (function(global) {
      * set the canvas elements height/width and add it to the DOM.
      */
 
+   
 
     var doc = global.document,
         win = global.window,
@@ -183,17 +186,24 @@ var Engine = (function(global) {
     var t = document.createTextNode("Start Game");  
     startButton.classList.add("playButton");
     startButton.appendChild(t);
-    startButton.onclick = function (){
-
-        let gameTimer = setInterval(updateDisplay, 1000); // every second call updateDisplay
-
+    startButton.onclick = function() {
         startSection.style.display = "none";
+        restartGame();
+
+
+        init();
+    }
+
+function restartGame(){
+          game.stars = 0;
     
         game.level = gameLevel;
-
+        /*Set Default Player if No Player is Chose */
         if (player.sprite === "images/") {
             player.sprite = "images/char-boy.png";
         }
+
+
 
         const enemy1 = new Enemy(0,1,gameLevel);
         const enemy2 = new Enemy(-1,2,gameLevel);
@@ -221,10 +231,8 @@ var Engine = (function(global) {
         default:
             allEnemies = [enemy1,enemy2,enemy3];
 }
-        
 
-        init();
-    }
+}
 
 
     /* This function serves as the kickoff point for the game loop itself
@@ -254,6 +262,8 @@ function updateDisplay() {
          * our update function since it may be used for smooth animation.
          */
 
+ 
+
         
         update(dt);
         render();
@@ -278,9 +288,41 @@ function updateDisplay() {
         
         reset();
         lastTime = Date.now();
-        let game = new Game();
-game.level = gameLevel;
-game.stars = 0;
+
+
+         gameTimer = setInterval(updateDisplay, 1000); // every second call updateDisplay
+
+        setTimeout(function() {        // Set a timer
+        clearInterval(gameTimer);      // Stop the running loop
+                    const gameOver = document.createElement('div');
+                    document.body.appendChild(gameOver);
+                    gameOver.classList.add("modal");
+                    gameOver.style.display = "block";
+                    const gameOverContent = document.createElement('div');
+                    gameOver.appendChild(gameOverContent);
+                    gameOverContent.classList.add("modal-content");
+                    const gameOverHeader= document.createElement('h2');
+                    const gameOverText = document.createTextNode("Game Over!");
+                    gameOverHeader.appendChild(gameOverText);
+                    gameOverContent.appendChild(gameOverHeader);
+                    
+                    const restartButton = document.createElement('button');
+                    gameOverContent.appendChild(restartButton);
+                    var t = document.createTextNode("Play Again?");  
+                    restartButton.classList.add("playButton");
+                    restartButton.appendChild(t);
+                    restartButton.onclick = function() {
+                        gameOver.style.display = "none";
+                        $('#timer').find('.value').text(0);
+                        restartGame();
+
+                        
+                    }
+
+                        // Let the user know, do other stuff here
+        }, 20000); 
+
+
         main();
 
         
@@ -332,6 +374,7 @@ game.stars = 0;
         });
         if (player.win){
             reset();
+            clearInterval(gameTimer);
         }
         else
         {
@@ -444,5 +487,7 @@ game.stars = 0;
      * from within their app.js files.
      */
     global.ctx = ctx;
+
+
 
 })(this);

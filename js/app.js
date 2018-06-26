@@ -143,9 +143,7 @@ class Star extends Character {
 }
 
 
-let game = new Game();
-game.level = gameLevel;
-game.stars = 0;
+
 
 
 
@@ -163,7 +161,7 @@ let allEnemies = [];
 
 
 let stars = [];
-
+ let game = new Game();
 
 
 // Place the player object in a variable called player
