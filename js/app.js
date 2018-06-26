@@ -1,6 +1,6 @@
 class Game {
     contructor(){
-        this.level = 3;
+        this.level = 1;
         this.stars = 0;
         this.time = 0;
     }
@@ -9,7 +9,7 @@ class Game {
 class Character {
     constructor() {
         this.sprite = 'images/';
-        this.x = 2;
+        this.x = 0;
         this.y = 5;
         this.level = 1;
     }

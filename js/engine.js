@@ -346,7 +346,7 @@ function updateDisplay() {
              allEnemies.forEach(enemy => {
                 if(enemy.checkCollisions(player) || player.checkCollisions(enemy)) {
                     player.y = 5;
-                    player.x = 2;
+                    player.x = 0;
                 }
         });
              stars.forEach(star => {
@@ -460,7 +460,7 @@ function updateDisplay() {
 
     
              player.y = 5;
-             player.x = 2;
+             player.x = 0;
              player.win = false;
         
         // noop
