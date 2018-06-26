@@ -184,6 +184,9 @@ var Engine = (function(global) {
     startButton.classList.add("playButton");
     startButton.appendChild(t);
     startButton.onclick = function (){
+
+        let gameTimer = setInterval(updateDisplay, 1000); // every second call updateDisplay
+
         startSection.style.display = "none";
     
         game.level = gameLevel;
@@ -193,26 +196,25 @@ var Engine = (function(global) {
         }
 
         const enemy1 = new Enemy(0,1,gameLevel);
-const enemy2 = new Enemy(-1,2,gameLevel);
-const enemy3 = new Enemy(-2,3,gameLevel);
-const enemy4 = new Enemy(0,4,gameLevel);
-const enemy5 = new Enemy(-3,2,gameLevel);
-const enemy6 = new Enemy(1,1,gameLevel);
-switch (game.level) {
-    case 1:
-        
+        const enemy2 = new Enemy(-1,2,gameLevel);
+        const enemy3 = new Enemy(-2,3,gameLevel);
+        const enemy4 = new Enemy(0,4,gameLevel);
+        const enemy5 = new Enemy(-3,2,gameLevel);
+        const enemy6 = new Enemy(1,1,gameLevel);
+        switch (game.level) {
+        case 1:
             allEnemies = [enemy1,enemy2,enemy3];
-        break;
+            break;
 
-    case 2:
-        allEnemies = [enemy1,enemy2,enemy3,enemy4];
-        break;
-    case 3:
-        allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5];
-        break;
+        case 2:
+            allEnemies = [enemy1,enemy2,enemy3,enemy4];
+            break;
+        case 3:
+            allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5];
+            break;
    
-    default:
-        allEnemies = [enemy1,enemy2,enemy3];
+        default:
+            allEnemies = [enemy1,enemy2,enemy3];
 }
         
 
@@ -223,6 +225,13 @@ switch (game.level) {
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
+
+     /* Update timer display */
+function updateDisplay() {
+    let value = parseInt($('#timer').find('.value').text(), 10);
+    value++;
+    $('#timer').find('.value').text(value);
+}
 
 
 
