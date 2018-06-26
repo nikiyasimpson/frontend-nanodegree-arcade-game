@@ -1,7 +1,7 @@
 class Game {
     contructor(){
         this.level = 3;
-        this.score = 0;
+        this.stars = 0;
         this.time = 0;
     }
 }
@@ -24,10 +24,10 @@ class Character {
 
     }
 
-    checkCollisions(playerOrEnemy){
-        if (this.y === playerOrEnemy.y) {
+    checkCollisions(character){
+        if (this.y === character.y) {
             //how close player is before the player is in a collision 0.5
-            if (this.x >= playerOrEnemy.x - 0.5 && this.x <= playerOrEnemy.x + 0.5) {
+            if (this.x >= character.x - 0.5 && this.x <= character.x + 0.5) {
                 return true;
             }
         }
@@ -130,12 +130,22 @@ class Enemy extends Character {
     }
 }
 
-    
 
+class Star extends Character {
+    constructor() {
+        super();
+        this.sprite += 'Star.png';
+        this.x = Math.floor(Math.random() * 5) + 1 ;
+        this.y = Math.floor(Math.random() * 4) + 1 ;
+        
+    }
+
+}
 
 
 let game = new Game();
 game.level = gameLevel;
+game.stars = 0;
 
 
 
@@ -146,9 +156,13 @@ game.level = gameLevel;
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-//let allEnemies = [...Array(3)].map((_,i) => new Enemy(0,i+1,1));
+
 
 let allEnemies = [];
+
+
+
+let stars = [];
 
 
 

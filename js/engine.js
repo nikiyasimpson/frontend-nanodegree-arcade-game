@@ -201,16 +201,21 @@ var Engine = (function(global) {
         const enemy4 = new Enemy(0,4,gameLevel);
         const enemy5 = new Enemy(-3,2,gameLevel);
         const enemy6 = new Enemy(1,1,gameLevel);
+
+        
         switch (game.level) {
         case 1:
             allEnemies = [enemy1,enemy2,enemy3];
+            stars = [...Array(3)].map((_,i) => new Star());
             break;
 
         case 2:
             allEnemies = [enemy1,enemy2,enemy3,enemy4];
+            stars = [...Array(5)].map((_,i) => new Star());
             break;
         case 3:
             allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5];
+            stars = [...Array(6)].map((_,i) => new Star());
             break;
    
         default:
@@ -300,6 +305,14 @@ function updateDisplay() {
                     player.x = 2;
                 }
         });
+             stars.forEach(star => {
+                if(star.checkCollisions(player))
+                {
+                    game.stars += 1;
+                    const index = stars.indexOf(star);
+                    stars.splice(index,1);
+                }
+             })
       
 
     }
@@ -382,6 +395,13 @@ function updateDisplay() {
             enemy.render();
         });
 
+
+        stars.forEach(function(star) {
+            star.render();
+        });
+
+
+
        
 
         player.render();
@@ -412,7 +432,8 @@ function updateDisplay() {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/char-pink-girl.png',
-        'images/char-princess-girl.png'
+        'images/char-princess-girl.png',
+        'images/Star.png'
     ]);
     
 
