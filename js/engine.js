@@ -42,6 +42,10 @@ var Engine = (function(global) {
     const startSectionContent = document.createElement('div');
     startSection.appendChild(startSectionContent);
     startSectionContent.classList.add("modal-content");
+    const instructionsParagraph = document.createElement('p');
+    const insText = document.createTextNode("You have 30 seconds to cross the road, collect stars and avoid the bugs.");
+    instructionsParagraph.appendChild(insText);
+    startSectionContent.appendChild(instructionsParagraph);
     const levelInsP= document.createElement('h2');
     startSectionContent.appendChild(levelInsP);
 
@@ -184,17 +188,17 @@ var Engine = (function(global) {
             }
 
             const enemy1 = new Enemy(0,1,gameLevel);
-            const enemy2 = new Enemy(-1,2,gameLevel);
-            const enemy3 = new Enemy(-2,3,gameLevel);
+            const enemy2 = new Enemy(-2,2,gameLevel);
+            const enemy3 = new Enemy(-4,3,gameLevel);
             const enemy4 = new Enemy(0,4,gameLevel);
-            const enemy5 = new Enemy(-3,2,gameLevel);
-            const enemy6 = new Enemy(1,1,gameLevel);
+            const enemy5 = new Enemy(-7,2,gameLevel);
+            const enemy6 = new Enemy(-6,1,gameLevel);
 
             
             switch (game.level) {
             case 1:
                 allEnemies = [enemy1,enemy2,enemy3];
-                stars = [...Array(3)].map((_,i) => new Star());
+                stars = [...Array(4)].map((_,i) => new Star());
                 break;
 
             case 2:
@@ -213,8 +217,9 @@ var Engine = (function(global) {
 
      /* Update timer display */
     function updateDisplay() {
+        
         let value = parseInt($('#timer').find('.value').text(), 10);
-        value++;
+        value--;
         $('#timer').find('.value').text(value);
     }
 
@@ -288,7 +293,7 @@ var Engine = (function(global) {
                     }
                 }
                         // Let the user know, do other stuff here
-        }, 20000); 
+        }, 30000); 
 
 
         main();  

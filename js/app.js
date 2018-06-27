@@ -3,6 +3,7 @@ class Game {
         this.level = 1;
         this.stars = 0;
         this.time = 0;
+        //If player wins, set gameOver to true
         this.gameOver = false;
     }
 }
@@ -107,7 +108,7 @@ class Enemy extends Character {
                 this.speed = 6;
                 break;
             case 3:
-                this.speed = 8;
+                this.speed = 6;
                 break;
             default:
                 this.speed = 4;
@@ -116,7 +117,7 @@ class Enemy extends Character {
 
     update(dt) {
         super.update();
-        let rand = Math.random()*dt* this.speed;
+        let rand = Math.random() * dt  * this.speed;
         if (this.isOutOfBoundsX){
             this.x = -1;
         }
