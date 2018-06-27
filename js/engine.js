@@ -318,6 +318,7 @@ function updateDisplay() {
                         gameOver.style.display = "none";
                         $('#timer').find('.value').text(0);
                         restartGame();
+                        init();
 
                         
                     }

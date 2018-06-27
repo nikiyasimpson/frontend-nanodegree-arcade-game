@@ -140,7 +140,7 @@ class Star extends Character {
     constructor() {
         super();
         this.sprite += 'Star.png';
-        this.x = Math.floor(Math.random() * 5) + 1 ;
+        this.x = Math.floor(Math.random() * 4) + 1 ;
         this.y = Math.floor(Math.random() * 4) + 1 ;
         
     }
