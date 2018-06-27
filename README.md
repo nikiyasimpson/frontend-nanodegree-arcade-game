@@ -14,6 +14,10 @@ This project uses object oriented javascript programming to create a frogger sty
 
 ## Instructions
 
+To run, open index.html from any web browser. Choose from level 1-3 and choose a player. Click on Start Game to begin.
+
+Player must get from the starting point to the water in less than 30 seconds. Collect as many stars as possible and avoid the bugs along the way.
+
 The project has 4 different javascript files that drive the application functionality. The game has different characters including players, enemies, and stars.
 
 All of the javaScript code is located in the js directory.

@@ -165,6 +165,7 @@ p{
 
 .selected li {
     background-color:blue;
+    color:white;
 }
 
 .selected {

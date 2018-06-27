@@ -79,7 +79,7 @@ var Engine = (function(global) {
         level3.classList.remove("selected");
         gameLevel = 1;
        
-    }
+    };
 
 
     level2.onclick = function(){
@@ -89,7 +89,7 @@ var Engine = (function(global) {
         level3.classList.remove("selected");
         gameLevel = 2;
 
-    }
+    };
 
 
     level3.onclick = function(){
@@ -99,7 +99,7 @@ var Engine = (function(global) {
         level2.classList.remove("selected");
         gameLevel= 3;
        
-    }
+    };
 
     /*Choose Player Avatar */
     const playerInsP= document.createElement('h2');
@@ -146,7 +146,7 @@ var Engine = (function(global) {
         playerchoice2.classList.remove("selected");
         playerchoice3.classList.remove("selected");
         player.sprite = 'images/char-boy.png';
-    }
+    };
 
     playerchoice2.onclick = function(){
     
@@ -154,7 +154,7 @@ var Engine = (function(global) {
         playerchoice1.classList.remove("selected");
         playerchoice3.classList.remove("selected");
         player.sprite = 'images/char-pink-girl.png';
-    }
+    };
 
 
     playerchoice3.onclick = function(){
@@ -163,7 +163,7 @@ var Engine = (function(global) {
         playerchoice1.classList.remove("selected");
         playerchoice2.classList.remove("selected");
         player.sprite = 'images/char-princess-girl.png';
-    }
+    };
 
 
     /*Start Game Button*/
@@ -176,7 +176,7 @@ var Engine = (function(global) {
         startSection.style.display = "none";
         restartGame();
         init();
-    }
+    };
 
     /*Restart Game Settings*/
     function restartGame(){
@@ -192,7 +192,6 @@ var Engine = (function(global) {
             const enemy3 = new Enemy(-4,3,gameLevel);
             const enemy4 = new Enemy(0,4,gameLevel);
             const enemy5 = new Enemy(-7,2,gameLevel);
-            const enemy6 = new Enemy(-6,1,gameLevel);
 
             
             switch (game.level) {
@@ -290,7 +289,7 @@ var Engine = (function(global) {
                         $('#timer').find('.value').text(0);
                         restartGame();
                         init();
-                    }
+                    };
                 }
                         // Let the user know, do other stuff here
         }, 30000); 
