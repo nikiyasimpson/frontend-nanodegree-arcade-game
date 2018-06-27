@@ -1,7 +1,7 @@
 
 //Show Winner Modal
 function showWin() {
-
+    "use strict";
     var modal = document.getElementById('winModal');
     var content = document.getElementById('winContent');
     var starPanel = document.createElement("div");
@@ -22,16 +22,17 @@ function showWin() {
     closeBar.onclick = function() {
         modal.style.display = "none";
         startOver();
-    }
+    };
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    }
+    };
 }
 
 function startOver() {
+    "use strict";
     location.reload();
 }

@@ -14,6 +14,7 @@
  */
 
 var Engine = (function(global) {
+    "use strict";
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
@@ -58,7 +59,6 @@ var Engine = (function(global) {
             level2  = document.createElement('li'),
             level3 = document.createElement('li');
 
-    let playerChoice =  "/images/char-boy.png";
 
     level1.textContent = '1';
     level2.textContent = '2';
@@ -111,9 +111,9 @@ var Engine = (function(global) {
     var player2 = document.createElement("img");
     var player3 = document.createElement("img");
 
-    player1src = 'char-boy.png';
-    player2src = 'char-pink-girl.png';
-    player3src = 'char-princess-girl.png';
+    const player1src = 'char-boy.png';
+    const player2src = 'char-pink-girl.png';
+    const player3src = 'char-princess-girl.png';
 
     player1.src = 'images/'+ player1src;
     player2.src = 'images/'+ player2src;
@@ -377,7 +377,7 @@ var Engine = (function(global) {
             row, col;
         
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
