@@ -13,15 +13,11 @@
  * writing app.js a little simpler to work with.
  */
 
-
-
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
      */
-
-   
 
     var doc = global.document,
         win = global.window,
@@ -34,11 +30,13 @@ var Engine = (function(global) {
     doc.body.appendChild(canvas);
 
 
-/* Start Here Area */
+    /* Start Here Area */
     const startSection = document.createElement('div');
     document.body.appendChild(startSection);
     startSection.classList.add("modal");
 
+
+    /*Show Start Modal */
     startSection.style.display = "block";
 
     const startSectionContent = document.createElement('div');
@@ -70,7 +68,7 @@ var Engine = (function(global) {
     levelChoice.appendChild(level3);
 
 
-       level1.onclick = function(){
+    level1.onclick = function(){
         
         level1.classList.add("selected");
         level2.classList.remove("selected");
@@ -80,7 +78,7 @@ var Engine = (function(global) {
     }
 
 
-        level2.onclick = function(){
+    level2.onclick = function(){
     
         level2.classList.add("selected");
         level1.classList.remove("selected");
@@ -90,10 +88,7 @@ var Engine = (function(global) {
     }
 
 
-    
-
-
-        level3.onclick = function(){
+    level3.onclick = function(){
         
         level3.classList.add("selected");
         level1.classList.remove("selected");
@@ -101,9 +96,6 @@ var Engine = (function(global) {
         gameLevel= 3;
        
     }
- 
-    
-
 
     /*Choose Player Avatar */
     const playerInsP= document.createElement('h2');
@@ -114,7 +106,6 @@ var Engine = (function(global) {
     var player1 = document.createElement("img");
     var player2 = document.createElement("img");
     var player3 = document.createElement("img");
-
 
     player1src = 'char-boy.png';
     player2src = 'char-pink-girl.png';
@@ -138,15 +129,12 @@ var Engine = (function(global) {
     playerchoice2.classList.add("playerSelection");
     playerchoice3.classList.add("playerSelection");
 
-
     playerChoices.classList.add("player");
 
     startSectionContent.appendChild(playerChoices);
     playerChoices.appendChild(playerchoice1);
     playerChoices.appendChild(playerchoice2);
     playerChoices.appendChild(playerchoice3);
-
-
 
     playerchoice1.onclick = function(){
         
@@ -156,29 +144,25 @@ var Engine = (function(global) {
         player.sprite = 'images/char-boy.png';
     }
 
-
     playerchoice2.onclick = function(){
     
         playerchoice2.classList.add("selected");
         playerchoice1.classList.remove("selected");
         playerchoice3.classList.remove("selected");
         player.sprite = 'images/char-pink-girl.png';
-
-
     }
 
 
     playerchoice3.onclick = function(){
-        
+      
         playerchoice3.classList.add("selected");
         playerchoice1.classList.remove("selected");
         playerchoice2.classList.remove("selected");
         player.sprite = 'images/char-princess-girl.png';
- 
     }
 
 
-
+    /*Start Game Button*/
     const startButton = document.createElement('button');
     startSectionContent.appendChild(startButton);
     var t = document.createTextNode("Start Game");  
@@ -187,65 +171,56 @@ var Engine = (function(global) {
     startButton.onclick = function() {
         startSection.style.display = "none";
         restartGame();
-
-
         init();
     }
 
-function restartGame(){
+    /*Restart Game Settings*/
+    function restartGame(){
           game.stars = 0;
-    
-        game.level = gameLevel;
-        /*Set Default Player if No Player is Chose */
-        if (player.sprite === "images/") {
-            player.sprite = "images/char-boy.png";
-        }
+            game.level = gameLevel;
+            /*Set Default Player if No Player is Chose */
+            if (player.sprite === "images/") {
+                player.sprite = "images/char-boy.png";
+            }
 
+            const enemy1 = new Enemy(0,1,gameLevel);
+            const enemy2 = new Enemy(-1,2,gameLevel);
+            const enemy3 = new Enemy(-2,3,gameLevel);
+            const enemy4 = new Enemy(0,4,gameLevel);
+            const enemy5 = new Enemy(-3,2,gameLevel);
+            const enemy6 = new Enemy(1,1,gameLevel);
 
+            
+            switch (game.level) {
+            case 1:
+                allEnemies = [enemy1,enemy2,enemy3];
+                stars = [...Array(3)].map((_,i) => new Star());
+                break;
 
-        const enemy1 = new Enemy(0,1,gameLevel);
-        const enemy2 = new Enemy(-1,2,gameLevel);
-        const enemy3 = new Enemy(-2,3,gameLevel);
-        const enemy4 = new Enemy(0,4,gameLevel);
-        const enemy5 = new Enemy(-3,2,gameLevel);
-        const enemy6 = new Enemy(1,1,gameLevel);
+            case 2:
+                allEnemies = [enemy1,enemy2,enemy3,enemy4];
+                stars = [...Array(5)].map((_,i) => new Star());
+                break;
+            case 3:
+                allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5];
+                stars = [...Array(6)].map((_,i) => new Star());
+                break;
+       
+            default:
+                allEnemies = [enemy1,enemy2,enemy3];
+            }
+    }
 
-        
-        switch (game.level) {
-        case 1:
-            allEnemies = [enemy1,enemy2,enemy3];
-            stars = [...Array(3)].map((_,i) => new Star());
-            break;
-
-        case 2:
-            allEnemies = [enemy1,enemy2,enemy3,enemy4];
-            stars = [...Array(5)].map((_,i) => new Star());
-            break;
-        case 3:
-            allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5];
-            stars = [...Array(6)].map((_,i) => new Star());
-            break;
-   
-        default:
-            allEnemies = [enemy1,enemy2,enemy3];
-}
-
-}
-
+     /* Update timer display */
+    function updateDisplay() {
+        let value = parseInt($('#timer').find('.value').text(), 10);
+        value++;
+        $('#timer').find('.value').text(value);
+    }
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
-
-     /* Update timer display */
-function updateDisplay() {
-    let value = parseInt($('#timer').find('.value').text(), 10);
-    value++;
-    $('#timer').find('.value').text(value);
-}
-
-
-
     function main() {
         /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
@@ -259,10 +234,6 @@ function updateDisplay() {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
-
- 
-
-        
         update(dt);
         render();
 
@@ -282,21 +253,16 @@ function updateDisplay() {
      * game loop.
      */
     function init() {
-
-        
         reset();
         game.gameOver = false;
-
-
         lastTime = Date.now();
-
-
-         gameTimer = setInterval(updateDisplay, 1000); // every second call updateDisplay
+        gameTimer = setInterval(updateDisplay, 1000); // every second call updateDisplay
 
         setTimeout(function() {    
             // Set a timer
                 if(game.gameOver === false) {
                     clearInterval(gameTimer);      // Stop the running loop
+                    /* Create Game Over Modal */
                     const gameOver = document.createElement('div');
                     document.body.appendChild(gameOver);
                     gameOver.classList.add("modal");
@@ -319,18 +285,13 @@ function updateDisplay() {
                         $('#timer').find('.value').text(0);
                         restartGame();
                         init();
-
-                        
                     }
                 }
-
                         // Let the user know, do other stuff here
         }, 20000); 
 
 
-        main();
-
-        
+        main();  
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -348,22 +309,21 @@ function updateDisplay() {
     }
 
     function checkCollisions(){
-             allEnemies.forEach(enemy => {
-                if(enemy.checkCollisions(player) || player.checkCollisions(enemy)) {
-                    player.y = 5;
-                    player.x = 0;
-                }
+        allEnemies.forEach(enemy => {
+            if(enemy.checkCollisions(player) || player.checkCollisions(enemy)) {
+                player.y = 5;
+                player.x = 0;
+            }
         });
-             stars.forEach(star => {
-                if(star.checkCollisions(player))
+             
+        stars.forEach(star => {
+            if(star.checkCollisions(player))
                 {
                     game.stars += 1;
                     const index = stars.indexOf(star);
                     stars.splice(index,1);
                 }
-             })
-      
-
+        });
     }
 
     /* This is called by the update function and loops through all of the
@@ -377,12 +337,11 @@ function updateDisplay() {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
+
         if (player.win){
             showWin();
             game.gameOver = true;
-            reset();
-            
-            
+            reset();  
         }
         else
         {
@@ -453,10 +412,6 @@ function updateDisplay() {
             star.render();
         });
 
-
-
-       
-
         player.render();
     }
 
@@ -465,13 +420,12 @@ function updateDisplay() {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-
+        /*resets player settings*/
     
-             player.y = 5;
-             player.x = 0;
-             player.win = false;
+        player.y = 5;
+        player.x = 0;
+        player.win = false;
         
-        // noop
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -489,7 +443,6 @@ function updateDisplay() {
         'images/Star.png'
     ]);
     
-
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developers can use it more easily
      * from within their app.js files.

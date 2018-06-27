@@ -15,16 +15,19 @@ class Character {
         this.level = 1;
     }
 
+    //Draws the image on the screen
     render() {
          ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
     }
 
+    //Checks to see if character is off the screen
     update(dt){
         this.isOutOfBoundsX = this.x > 5;
         this.isOutOfBoundsY = this.y < 1;
 
     }
 
+    //Checks to see if characters run into each other
     checkCollisions(character){
         if (this.y === character.y) {
             //how close player is before the player is in a collision 0.5
@@ -36,8 +39,6 @@ class Character {
             return false;
         }
     }
-
-
 }
 
 class Player extends Character {
@@ -53,12 +54,8 @@ class Player extends Character {
         super.update();
 
         if  (this.isOutOfBoundsY && !this.moving && !this.win){
-                
                 this.win = true;
-                
-
         }
-
        
     }
 
@@ -101,25 +98,20 @@ class Enemy extends Character {
         this.x = x;
         this.y = y;
         this.level = level;
-        //this.speed = level *4;
 
         switch (level) {
-    case 1:
-        
-            this.speed = 4;
-        break;
-
-    case 2:
-            this.speed = 6;
-        break;
-    case 3:
-            this.speed = 8;
-        break;
-   
-    default:
-            this.speed = 4;
-}
-
+            case 1:
+                this.speed = 4;
+                break;
+            case 2:
+                this.speed = 6;
+                break;
+            case 3:
+                this.speed = 8;
+                break;
+            default:
+                this.speed = 4;
+        }
     }
 
     update(dt) {
@@ -131,51 +123,30 @@ class Enemy extends Character {
         else {
             this.x += rand;
         }
-
     }
 }
-
 
 class Star extends Character {
     constructor() {
         super();
         this.sprite += 'Star.png';
+        //randomly sets stars on the screen
         this.x = Math.floor(Math.random() * 4) + 1 ;
-        this.y = Math.floor(Math.random() * 4) + 1 ;
-        
+        this.y = Math.floor(Math.random() * 4) + 1 ;      
     }
-
 }
-
-
-
-
-
-
-
-//Enemies
-
-
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-
-
 let allEnemies = [];
-
-
-
 let stars = [];
- let game = new Game();
- var gameLevel = 1;
- var gameTimer;
-
+let game = new Game();
+let gameLevel = 1;
+var gameTimer;
 
 // Place the player object in a variable called player
 //const player = new Player();
-  player = new Player();
-
-
+player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
