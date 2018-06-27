@@ -8,11 +8,11 @@ h1 {
 }
 
 h2 {
-	font-size:2em;
+	font-size:3em;
 }
 
 p{
-	font-size:1em;
+	font-size:2em;
 }
 
 /* The Modal (background) */
@@ -34,6 +34,7 @@ p{
 .modal-content {
     background-color: #fefefe;
     margin: auto;
+    text-align:center;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
@@ -60,8 +61,10 @@ p{
 	color: white;
 	border-radius: 5px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    padding:5px;
-    font-size: 14px;
+    padding:10px;
+    font-size: 2em;
+    font-family: 'Gamja Flower', cursive;
+}
 
 }
 
