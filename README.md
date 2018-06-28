@@ -32,7 +32,7 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## How to Play
 
-To play cross the road, try to move the player from the grass to the stream in less than 30 seconds. On the way collect as many stars as possible while avoiding the bugs that will knock you off the path. You can choose from 3 different levels that increase the difficulty of the game. Try to beat your own time each time you play.
+To play cross the road, try to move the player from the grass to the stream in less than 30 seconds. Use your up, down, left, and right arrow keys to move. On the way collect as many stars as possible while avoiding the bugs that will knock you off the path. You can choose from 3 different levels that increase the difficulty of the game. Try to beat your own time each time you play.
 
 ## Authors
 

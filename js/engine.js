@@ -44,7 +44,7 @@ var Engine = (function(global) {
     startSection.appendChild(startSectionContent);
     startSectionContent.classList.add("modal-content");
     const instructionsParagraph = document.createElement('p');
-    const insText = document.createTextNode("You have 30 seconds to cross the road, collect stars and avoid the bugs.");
+    const insText = document.createTextNode("You have 30 seconds to cross the road, collect stars and avoid the bugs. Use up, down, left and right arrow keys to move.");
     instructionsParagraph.appendChild(insText);
     startSectionContent.appendChild(instructionsParagraph);
     const levelInsP= document.createElement('h2');
